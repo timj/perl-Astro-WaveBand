@@ -986,7 +986,7 @@ sub has_filter {
    foreach my $key ( sort keys %list ) {
       # if the filter exists in the filter list for that instrument,
       # increment the counter
-      $counter++ if( ${$FILTERS{$key}}{$list{$key}} );
+     $counter++ if exists $FILTERS{$key}{$list{$key}};
    }
 
    # if the counter is the same size as the input list then all conditons
@@ -1020,7 +1020,7 @@ sub has_instrument {
       # if the filter exists in the filter list for that instrument,
       # increment the counter
       for my $i ( 0 ... $#{$TELESCOPE{$key}} ) {
-         if ( ${$TELESCOPE{$key}}[$i] eq $list{$key} ) {
+         if ( $TELESCOPE{$key}->[$i] eq $list{$key} ) {
              $counter++;
              last;
          }
