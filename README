@@ -6,6 +6,10 @@ names to wavelength and frequency and vice versa.  For example it
 knows the wavelengths of the J, H and K near-infrared filters or the
 filter names of the SCUBA submm camera.
 
+This software is still in alpha release. It's been used in my
+applications but there may be some future API tweaks required as more
+telescopes/instruments are included.
+
 Requirements
 ------------
 
