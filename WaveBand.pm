@@ -53,16 +53,8 @@ use Carp;
 # Register an Astro::WaveBand warning category
 use warnings::register;
 
-# CVS version: $Log$
-# CVS version: Revision 1.4  2002/05/28 19:15:56  timj
-# CVS version: - Include licence in perl module
-# CVS version: - Include README in MANIFEST!
-# CVS version: - Update to v0.04 for re-release to CPAN
-# CVS version:
-# CVS version: Revision 1.3  2002/05/16 21:15:59  timj
-# CVS version: Prepare for CPAN release
-# CVS version:
-our $VERSION = 0.04;
+# CVS version: $Revision$
+our $VERSION = 0.05;
 
 # Overloading
 use overload '""' => "natural";
@@ -124,6 +116,8 @@ my %FILTERS = (
 			"BrGz" =>  "2.173",
 			"2.248S(1)" => "2.248",
 			"2.27" =>  "2.270",
+			"Blank" => "-2.222",# -ve version of OT wavelength
+			"Mask"  => "-2.32", # ditto
 		       },
 	       MICHELLE => {
 			    "F105B53" => 10.5,
@@ -149,6 +143,18 @@ my %FILTERS = (
 			 "450W" => 443,
 			 "450N" => 442,
 			 "850N" => 862,
+			 "750N" => 741,
+			 "350N" => 344,
+			 "P2000" => 2000,
+			 "P1350" => 1350,
+			 "P1100" => 1100,
+			 # This is a kluge until the class can
+			 # be extended to support multiple wavelength
+			 # instruments.
+			 "850S:PHOT" => 1100,
+			 "450W:850W" => 443,
+			 "450N:850N" => 442,
+			 "350N:750N" => 344,
 			},
 	      );
 
@@ -792,6 +798,11 @@ sub _convert_from {
 =head1 BUGS
 
 Does not automatically convert metres to microns and GHz to Hz etc.
+
+Can not handle filters that correspond to multiple wavelengths.
+Currently SCUBA is the main issue. With a 450:850 filter this class
+always returns the shortest wavelength (since that is the wavelength
+that affects scheduling the most).
 
 =head1 AUTHORS
 
