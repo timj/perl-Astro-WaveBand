@@ -1,5 +1,12 @@
+2002-05-16  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* CPAN release 0.03
+
 2001-12-05  Tim Jenness  <t.jenness@jach.hawaii.edu>
 
 	* WaveBand.pm (_convert_to): Make sure that we do no require full
 	precision when matching wavelength against filter.
 
+2001-11-27  Tim Jenness  <t.jenness@jach.hawaii.edu>
+
+	* First version
