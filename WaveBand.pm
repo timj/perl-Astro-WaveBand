@@ -54,10 +54,15 @@ use Carp;
 use warnings::register;
 
 # CVS version: $Log$
+# CVS version: Revision 1.4  2002/05/28 19:15:56  timj
+# CVS version: - Include licence in perl module
+# CVS version: - Include README in MANIFEST!
+# CVS version: - Update to v0.04 for re-release to CPAN
+# CVS version:
 # CVS version: Revision 1.3  2002/05/16 21:15:59  timj
 # CVS version: Prepare for CPAN release
 # CVS version:
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 # Overloading
 use overload '""' => "natural";
@@ -796,6 +801,9 @@ Tim Jenness E<lt>t.jenness@jach.hawaii.eduE<gt>
 
 Copyright (C) 2001 Particle Physics and Astronomy Research Council.
 All Rights Reserved.
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
