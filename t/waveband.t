@@ -1,6 +1,6 @@
 
 use Test;
-BEGIN { plan tests => 75 }
+BEGIN { plan tests => 80 }
 
 use Astro::WaveBand;
 use warnings;
@@ -34,6 +34,15 @@ ok($w);
 my @tests = (
 	     { 
 	      _init => { Wavelength => '1.635',
+			 Instrument => 'UFTI'
+		       },
+	      filter => 'H98',
+	      wavelength => '1.635',
+	      natural => 'H98',
+	      waveband => 'infrared',
+	     },
+	     { 
+	      _init => { Wavelength => '1.634999999',
 			 Instrument => 'UFTI'
 		       },
 	      filter => 'H98',
@@ -159,7 +168,7 @@ for my $test (@tests) {
   for my $key (keys %$test) {
     next if $key eq '_init';
     unless (defined $obj) {
-      skip("skip Object could not be instantiated so no point trying");
+      skip("skip Object could not be instantiated so no point trying",1);
       next;
     }
 
