@@ -59,12 +59,12 @@ my @tests = (
 	      waveband => 'infrared',
 	     },
 	     { 
-	      _init => { Filter => 'H98', 
+	      _init => { Filter => 'BGamma', 
 			 Instrument => 'WFCAM'
 		       },
-	      filter => 'H98',
-	      wavelength => '1.49',
-	      natural => 'H98',
+	      filter => 'BGamma',
+	      wavelength => '2.155',
+	      natural => 'BGamma',
 	      waveband => 'infrared',
 	     },
 	     {
