@@ -701,6 +701,10 @@ sub _convert_to {
     my @search = ('GENERIC', keys %FILTERS);
     unshift(@search, $instrument) if defined $instrument;
 
+    # There will be a precision issue here so we convert
+    # the base wavelegnth to use 8 significant figures
+    $lambda = sprintf("%8e", $lambda);
+
     OUTER: foreach my $inst (@search) {
 	next unless exists $FILTERS{$inst};
 	my $hash = $FILTERS{$inst};

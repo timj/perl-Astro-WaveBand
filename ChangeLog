@@ -1,0 +1,5 @@
+2001-12-05  Tim Jenness  <t.jenness@jach.hawaii.edu>
+
+	* WaveBand.pm (_convert_to): Make sure that we do no require full
+	precision when matching wavelength against filter.
+
