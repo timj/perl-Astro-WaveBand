@@ -1,5 +1,5 @@
 #!perl
-use Test::More tests => 99;
+use Test::More tests => 105;
 
 use Astro::WaveBand;
 use warnings;
@@ -31,148 +31,148 @@ isa_ok($w, "Astro::WaveBand");
 
 # Set up the tests
 my @tests = (
-	     { 
-	      _init => { Wavelength => '1.635',
-			 Instrument => 'UFTI'
-		       },
-	      filter => 'H98',
-	      wavelength => '1.635',
-	      natural => 'H98',
-	      waveband => 'infrared',
-	     },
-	     { 
-	      _init => { Wavelength => '1.634999999',
-			 Instrument => 'UFTI'
-		       },
-	      filter => 'H98',
-	      wavelength => '1.635',
-	      natural => 'H98',
-	      waveband => 'infrared',
-	     },
-	     { 
-	      _init => { Filter => 'BrG', 
-			 Instrument => 'IRCAM'
-		       },
-	      filter => 'BrG',
-	      wavelength => '2.0',
-	      natural => 'BrG',
-	      waveband => 'infrared',
-	     },
-	     { 
-	      _init => { Filter => 'BGamma', 
-			 Instrument => 'WFCAM'
-		       },
-	      filter => 'BGamma',
-	      wavelength => '2.155',
-	      natural => 'BGamma',
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => { Wavelength => 2.226,
-			 Instrument => 'IRCAM'
-		       },
-	      filter => undef,
-	      wavelength => 2.226,
-	      natural => 2.226,
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => { Filter => '450W',
-			 Instrument => 'SCUBA'
-		       },
-	      filter => '450W',
-	      wavelength => '443',
-	      frequency => 676732410835.214,
-	      natural => '450W',
-	      waveband => 'submm',
-	     },
-	     {
-	      _init => { Frequency => 22E9,
-		       },
-	      filter => undef,
-	      wavelength => 13626.9299090909,
-	      frequency => 22E9,
-	      natural => 13626.9299090909,
-	      waveband => 'radio',
-	     },
-	     {
-	      _init => { Filter => 'I',
-		       },
-	      filter => 'I',
-	      wavelength => 0.90,
-	      wavenumber => 11111.1111111111,
-	      natural => 'I',
-	      waveband => 'optical',
-	     },
-	     {
-	      _init => { Filter => 'U',
-		       },
-	      filter => 'U',
-	      wavelength => 0.365,
-	      wavenumber => 27397.2602739726,
-	      natural => 'U',
-	      waveband => 'optical',
-	     },
-	     {
-	      _init => { Wavenumber => 1500,
-		       },
-	      filter => undef,
-	      wavelength => 6.66666666666667,
-	      wavenumber => 1500,
-	      natural => 6.66666666666667,
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => { Filter => "F79B10",
-			 Instrument => 'MICHELLE',
-		       },
-	      filter => "F79B10",
-	      wavelength => 7.9,
-	      wavenumber => 1265.82278481013,
-	      natural => "F79B10",
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => { Filter => "F79B10",
-			 Instrument => 'MICHELLE',
-		       },
-	      filter => "F79B10",
-	      wavelength => 7.9,
-	      wavenumber => 1265.82278481013,
-	      natural => "F79B10",
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => { Wavelength => 3.367,
-			 Instrument => 'CGS4',
-		       },
-	      filter => undef,
-	      wavelength => 3.367,
-	      wavenumber => 2970.00297000297,
-	      frequency => 89038449064449.1,
-	      natural => 3.367,
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => { Wavelength => 7.9,
-			 Instrument => 'MICHELLE',
-		       },
-	      filter => "F79B10",
-	      wavelength => 7.9,
-	      wavenumber => 1265.82278481013,
-	      natural => "F79B10",
-	      waveband => 'infrared',
-	     },
-	     {
-	      _init => {Frequency => 345.0E9,
-			Instrument => 'RXA3',
-		       },
-	      filter => undef,
-	      wavelength => 868.9636,
-	      waveband => 'submm',
-	      natural => 345E9,
-	     }
-	    );
+             {
+              _init => { Wavelength => '1.635',
+                         Instrument => 'UFTI'
+                       },
+              filter => 'H98',
+              wavelength => '1.635',
+              natural => 'H98',
+              waveband => 'infrared',
+             },
+             {
+              _init => { Wavelength => '1.634999999',
+                         Instrument => 'UFTI'
+                       },
+              filter => 'H98',
+              wavelength => '1.635',
+              natural => 'H98',
+              waveband => 'infrared',
+             },
+             {
+              _init => { Filter => 'BrG',
+                         Instrument => 'IRCAM'
+                       },
+              filter => 'BrG',
+              wavelength => '2.0',
+              natural => 'BrG',
+              waveband => 'infrared',
+             },
+             {
+              _init => { Filter => 'BGamma',
+                         Instrument => 'WFCAM'
+                       },
+              filter => 'BGamma',
+              wavelength => '2.155',
+              natural => 'BGamma',
+              waveband => 'infrared',
+             },
+             {
+              _init => { Wavelength => 2.226,
+                         Instrument => 'IRCAM'
+                       },
+              filter => undef,
+              wavelength => 2.226,
+              natural => 2.226,
+              waveband => 'infrared',
+             },
+             {
+              _init => { Filter => '450W',
+                         Instrument => 'SCUBA'
+                       },
+              filter => '450W',
+              wavelength => '443',
+              frequency => 676732410835.214,
+              natural => '450W',
+              waveband => 'submm',
+             },
+             {
+              _init => { Frequency => 22E9,
+                       },
+              filter => undef,
+              wavelength => 13626.9299090909,
+              frequency => 22E9,
+              natural => 13626.9299090909,
+              waveband => 'radio',
+             },
+             {
+              _init => { Filter => 'I',
+                       },
+              filter => 'I',
+              wavelength => 0.90,
+              wavenumber => 11111.1111111111,
+              natural => 'I',
+              waveband => 'optical',
+             },
+             {
+              _init => { Filter => 'U',
+                       },
+              filter => 'U',
+              wavelength => 0.365,
+              wavenumber => 27397.2602739726,
+              natural => 'U',
+              waveband => 'optical',
+             },
+             {
+              _init => { Wavenumber => 1500,
+                       },
+              filter => undef,
+              wavelength => 6.66666666666667,
+              wavenumber => 1500,
+              natural => 6.66666666666667,
+              waveband => 'infrared',
+             },
+             {
+              _init => { Filter => "F79B10",
+                         Instrument => 'MICHELLE',
+                       },
+              filter => "F79B10",
+              wavelength => 7.9,
+              wavenumber => 1265.82278481013,
+              natural => "F79B10",
+              waveband => 'infrared',
+             },
+             {
+              _init => { Filter => "F79B10",
+                         Instrument => 'MICHELLE',
+                       },
+              filter => "F79B10",
+              wavelength => 7.9,
+              wavenumber => 1265.82278481013,
+              natural => "F79B10",
+              waveband => 'infrared',
+             },
+             {
+              _init => { Wavelength => 3.367,
+                         Instrument => 'CGS4',
+                       },
+              filter => undef,
+              wavelength => 3.367,
+              wavenumber => 2970.00297000297,
+              frequency => 89038449064449.1,
+              natural => 3.367,
+              waveband => 'infrared',
+             },
+             {
+              _init => { Wavelength => 7.9,
+                         Instrument => 'MICHELLE',
+                       },
+              filter => "F79B10",
+              wavelength => 7.9,
+              wavenumber => 1265.82278481013,
+              natural => "F79B10",
+              waveband => 'infrared',
+             },
+             {
+              _init => {Frequency => 345.0E9,
+                        Instrument => 'RXA3',
+                       },
+              filter => undef,
+              wavelength => 868.9636,
+              waveband => 'submm',
+              natural => 345E9,
+             }
+            );
 
 print "# ====== Test behaviour ======\n";
 
@@ -232,5 +232,23 @@ ok( !Astro::WaveBand::is_observable( UKIRT => '850N' ),
   "UKIRT does not have 850N");
 ok( Astro::WaveBand::is_observable( JCMT => '850N' ),
   "JCMT has 850N");
+
+print "# ====== Test Brad's Modifications ======\n";
+
+my $wb1 = new Astro::WaveBand( Filter => 'K' );
+my $wb2 = new Astro::WaveBand( Wavelength => '2.2' );
+my $wb3 = new Astro::WaveBand( Filter => 'J' );
+ok( $wb1->equals($wb2), "K is 2.2 microns" );
+ok( $wb1 == $wb2, "K is 2.2 microns (using overloaded equality operator)");
+ok( $wb1 > $wb3, "K is longer wavelength than J (using overloaded greater than operator)");
+ok( $wb3 < $wb1, "J is shorter wavelength than K (using overloaded less than operator)");
+
+# Check equality with same filter but different instrument.
+my $wb_ufti = new Astro::WaveBand( Filter => 'Z',
+                                   Instrument => 'UFTI' );
+my $wb_wfcam = new Astro::WaveBand( Filter => 'Z',
+                                    Instrument => 'WFCAM' );
+ok( $wb_ufti != $wb_wfcam, "UFTI Z is not equal to WFCAM Z");
+ok( ! ( $wb_ufti == $wb_wfcam ), "UFTI Z is not equal to WFCAM Z");
 
 exit;

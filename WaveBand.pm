@@ -25,6 +25,9 @@ Astro::WaveBand - Transparently work in waveband, wavelength or filter
 
   $w->natural_unit("wavelength");
 
+  if( $w1 > $w2 ) { ... }
+  if( $w1 == $w2 ) { ... }
+
 =head1 DESCRIPTION
 
 Class to transparently deal with the conversion between filters,
@@ -43,6 +46,12 @@ Used mainly as a way of storing a single number in a database table
 but using logic to determine the number that an observer is most likely
 to understand.
 
+Numerical comparison operators can be used to compare two C<Astro::WaveBand>
+objects. When checking equality, the "natural" and "instrument" methods are
+used, so if two C<Astro::WaveBand> objects return the same value from those
+methods, they are considered to be equal. When checking other comparisons
+such as greater than, the wavelength is used.
+
 =cut
 
 use 5.006;
@@ -57,7 +66,10 @@ use warnings::register;
 our $VERSION = 0.07;
 
 # Overloading
-use overload '""' => "natural";
+use overload '""' => "natural",
+             '==' => "equals",
+             '!=' => "not_equals",
+             '<=>' => "compare";
 
 # Constants
 
@@ -536,6 +548,99 @@ sub natural {
   $value = $self->wavelength() unless defined $value;
 
   return $value;
+}
+
+=item B<compare>
+
+Compares two C<Astro::WaveBand> objects.
+
+  if( $wb1->compare( $wb2 ) ) { ... }
+
+This method will return -1 if, in the above example, $wb1 is of
+a shorter wavelength than $wb2, 0 if the wavelengths are equal,
+and +1 if $wb1 is of a longer wavelength than $wb2. Please note
+that for strict waveband equality the C<equals> method should be
+used, as that method uses the C<natural> method to check if two
+wavebands are identical.
+
+This method is overloaded with the standard numerical comparison
+operators, so to check if one waveband is shorter than another
+you would do
+
+  if( $wb1 < $wb2 ) { ... }
+
+and it will work as you expect. This method does not overload
+the == operator; see the C<compare> method for that.
+
+=cut
+
+sub compare {
+  my ( $object1, $object2, $was_reversed ) = @_;
+  ( $object1, $object2 ) = ( $object2, $object1 ) if $was_reversed;
+
+  return $object1->wavelength <=> $object2->wavelength;
+}
+
+=item B<equals>
+
+Compares two C<Astro::WaveBand> objects for equality.
+
+  if( $wb1->equals( $wb2 ) ) { ... }
+
+This method will return 1 if, in the above example, both
+C<Astro::WaveBand> objects return the same value from the
+C<natural> method AND for the C<instrument> method (if it
+is defined for both objects) , and 0 of they return different values.
+
+This method is overloaded using the == operator, so
+
+  if( $wb1 == $wb2 ) { ... }
+
+is functionally the same as the first example.
+
+=cut
+
+sub equals {
+  my $self = shift;
+  my $comp = shift;
+
+  if( defined( $self->instrument ) && defined( $comp->instrument ) ) {
+    return ( ( $self->natural eq $comp->natural ) &&
+             ( $self->instrument eq $comp->instrument ) );
+  } else {
+    return ( $self->natural eq $comp->natural );
+  }
+}
+
+=item B<not_equals>
+
+Compares two C<Astro::WaveBand> objects for inequality.
+
+  if( $wb1->not_equals( $wb2 ) ) { ... }
+
+This method will return 1 if, in the above example, either the
+C<natural> method or the C<instrument> method return different
+values. If the instrument is undefined for either object, then
+the C<natural> method will be used.
+
+This method is overloaded using the != operator, so
+
+  if( $wb1 != $wb2 ) { ... }
+
+is functionally the same as the first example.
+
+=cut
+
+sub not_equals {
+  my $self = shift;
+  my $comp = shift;
+
+  if( ! defined( $self->instrument ) || ! defined( $comp->instrument ) ) {
+    return ( $self->natural ne $comp->natural );
+  } else {
+    return ( ( $self->natural ne $comp->natural ) ||
+             ( $self->instrument ne $comp->instrument ) );
+  }
 }
 
 =back

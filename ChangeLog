@@ -1,3 +1,10 @@
+2004-12-08  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
+
+	* WaveBand.pm: Add comparison operators and overloaded comparison
+	operators.
+
+	* t/waveband.t: Test comparison operators.
+
 2004-09-13  Tim Jenness  <tjenness@cpan.org>
 
 	* t/waveband.t: Use Test::More
