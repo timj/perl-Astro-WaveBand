@@ -69,7 +69,8 @@ our $VERSION = 0.07;
 use overload '""' => "natural",
              '==' => "equals",
              '!=' => "not_equals",
-             '<=>' => "compare";
+             '<=>' => "compare",
+             'fallback' => 1;
 
 # Constants
 
