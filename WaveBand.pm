@@ -53,7 +53,11 @@ use Carp;
 # Register an Astro::WaveBand warning category
 use warnings::register;
 
-our $VERSION = (qw$Revision$)[1];
+# CVS version: $Log$
+# CVS version: Revision 1.3  2002/05/16 21:15:59  timj
+# CVS version: Prepare for CPAN release
+# CVS version:
+our $VERSION = 0.03;
 
 # Overloading
 use overload '""' => "natural";
