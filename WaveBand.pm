@@ -64,6 +64,11 @@ use overload '""' => "natural";
 # Speed of light in m/s
 use constant CLIGHT => 299792458;
 
+# list of instruments specific to a telescope
+my %TELESCOPE = (
+               UKIRT => [ "IRCAM", "UFTI", "UIST", "MICHELLE" ],
+               JCMT => [ "SCUBA" ] );
+
 # Continuum Filters are keyed by instrument
 # although if an instrument is not specified the filters
 # hash will be searched for a match if none is available in
@@ -395,6 +400,124 @@ sub filter {
   return;
 
 }
+
+=item B<has_filter>
+
+Returns true if the a particular instrument has a particular filter,
+otherwise returns C<undef>, e.g.
+
+  if( Astro::WaveBand::has_filter( UIST => "Kprime" )  {
+     ...
+  }
+
+if you pass a hash containing multiple instrument combinations,
+all must be valid or the method will return undef.
+      
+=cut 
+
+sub has_filter {
+   return undef unless @_;
+
+   # grab instrument and filter list
+   my %list = @_;
+   
+   my $counter = 0;
+   foreach my $key ( sort keys %list ) {
+      # if the filter exists in the filter list for that instrument,
+      # increment the counter
+      $counter++ if( ${$FILTERS{$key}}{$list{$key}} );      
+   }
+   
+   # if the counter is the same size as the input list then all conditons
+   # have been proved to be true...
+   return undef unless scalar(keys %list) == $counter;   
+   return 1;      
+}
+
+=item B<has_instrument>
+
+Returns true if the a particular instrument exists for a particular
+telescope, otherwise returns C<undef>, e.g.
+
+  if( Astro::WaveBand::has_instrument( UKIRT => "UIST" )  {
+     ...
+  }
+
+if you pass a hash containing multiple instrument combinations,
+all must be valid or the method will return undef.
+      
+=cut 
+
+sub has_instrument {
+   return undef unless @_;
+
+   # grab instrument and filter list
+   my %list = @_;
+   
+   my $counter = 0;
+   foreach my $key ( sort keys %list ) {
+      # if the filter exists in the filter list for that instrument,
+      # increment the counter
+      for my $i ( 0 ... $#{$TELESCOPE{$key}} ) {
+         if ( ${$TELESCOPE{$key}}[$i] eq $list{$key} ) {
+             $counter++;
+             last;
+         }    
+      }
+   }
+   
+   # if the counter is the same size as the input list then all conditons
+   # have been proved to be true...
+   return undef unless scalar(keys %list) == $counter;   
+   return 1;      
+}
+
+
+=item B<is_observable>
+
+Returns true if the a particular telescope and filter combination is
+avaialble, otherwise returns C<undef>, e.g.
+
+  if( Astro::WaveBand::is_observable( UKIRT => 'Kprime' )  {
+     ...
+  }
+      
+=cut 
+
+sub is_observable {
+   #my $self = shift;
+   return undef unless @_;
+
+   # grab instrument and filter list
+   my %list = @_;
+   
+   my $counter = 0;
+   foreach my $key ( sort keys %list ) {
+      # if the filter exists in the filter list for that instrument,
+      # increment the counter
+      #print "TELESCOPE $key\n";
+      for my $i ( 0 ... $#{$TELESCOPE{$key}} ) {
+         
+         #print "  INSTRUMENT ${$TELESCOPE{$key}}[$i]\n";
+         #print "  \$list{\$key} = $list{$key}\n";
+         my $instrument = ${$TELESCOPE{$key}}[$i];
+         
+         if ( ${$FILTERS{$instrument}}{$list{$key}} ) {      
+           $counter++;
+           #print "$counter: $key\n";
+           #print "   $list{$key}, $instrument, $list{$key}, ".
+           #      "${$FILTERS{${$TELESCOPE{$key}}[$i]}}{$list{$key}}\n"; 
+           last;
+         }   
+      }
+   }
+   
+   # if the counter is the same size as the input list then all conditons
+   # have been proved to be true...
+   return undef unless scalar(keys %list) == $counter;   
+   return 1;      
+}
+
 
 =item B<instrument>
 
@@ -849,6 +972,7 @@ to appear as something like: "CO 3-2 @ 30km/s LSR radio".
 =head1 AUTHORS
 
 Tim Jenness E<lt>t.jenness@jach.hawaii.eduE<gt>
+Alasdair Allan E<lt>aa@astro.ex.ac.ukE<gt>
 
 =head1 COPYRIGHT
 

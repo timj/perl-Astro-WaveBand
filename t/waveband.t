@@ -1,6 +1,6 @@
 
 use Test;
-BEGIN { plan tests => 85 }
+BEGIN { plan tests => 94 }
 
 use Astro::WaveBand;
 use warnings;
@@ -199,5 +199,21 @@ for my $test (@tests) {
   }
 
 }
+
+print "# ====== Test Alasdair's Modifications ======\n";
+
+# static methods Astro::WaveBand
+
+ok( Astro::WaveBand::has_filter( UIST => 'J98') );
+ok( !Astro::WaveBand::has_filter( UIST => 'Kprime') );
+ok(Astro::WaveBand::has_filter( UIST => 'J98', IRCAM => 'K98'));
+ok(!Astro::WaveBand::has_filter( UIST => 'H98', IRCAM => 'K97'));
+
+ok( Astro::WaveBand::has_instrument( UKIRT => 'UIST' ) );
+ok( !Astro::WaveBand::has_instrument( UKIRT => 'SCUBA' ) );
+
+ok( Astro::WaveBand::is_observable( UKIRT => 'Kprime' ) );
+ok( !Astro::WaveBand::is_observable( UKIRT => '850N' ) );
+ok( Astro::WaveBand::is_observable( JCMT => '850N' ) );
 
 exit;
