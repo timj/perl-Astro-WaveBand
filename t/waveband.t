@@ -1,12 +1,11 @@
-
-use Test;
-BEGIN { plan tests => 94 }
+#!perl
+use Test::More tests => 99;
 
 use Astro::WaveBand;
 use warnings;
 use strict;
 
-ok(1);
+use_ok("Astro::WaveBand");
 
 print "# ====== Test constructor ======\n";
 
@@ -14,19 +13,19 @@ print "# ====== Test constructor ======\n";
 my $w = new Astro::WaveBand( Wavelength => 850,
 			     Instrument => 'SCUBA');
 
-ok($w);
+isa_ok($w, "Astro::WaveBand");
 
 # These will return undef and raise an warning
 {
   no warnings 'Astro::WaveBand';
   $w = new Astro::WaveBand( Wavelength => 850, Frequency => 345E9);
-  ok($w, undef);
+  is($w, undef, "Test fail modes");
 
   $w = new Astro::WaveBand();
-  ok($w, undef);
+  is($w, undef, "Test fail modes");
 
   $w = new Astro::WaveBand( Instrument => 'UFTI');
-  ok($w, undef);
+  is($w, undef, "Test fail modes");
 }
 
 
@@ -57,6 +56,15 @@ my @tests = (
 	      filter => 'BrG',
 	      wavelength => '2.0',
 	      natural => 'BrG',
+	      waveband => 'infrared',
+	     },
+	     { 
+	      _init => { Filter => 'H98', 
+			 Instrument => 'WFCAM'
+		       },
+	      filter => 'H98',
+	      wavelength => '1.49',
+	      natural => 'H98',
 	      waveband => 'infrared',
 	     },
 	     {
@@ -171,7 +179,8 @@ print "# ====== Test behaviour ======\n";
 for my $test (@tests) {
   my $obj = new Astro::WaveBand( %{ $test->{_init} });
   print "# Object creation\n";
-  ok($obj);
+
+  isa_ok($obj,"Astro::WaveBand");
 
   for my $key (keys %$test) {
     next if $key eq '_init';
@@ -195,7 +204,7 @@ for my $test (@tests) {
     # print $obj->$key,"\n";
     print "# $key: ",( defined $correct ? $correct : "<UNDEF>" ) , "\n";
 
-    ok($fromobj, $correct);
+    is($fromobj, $correct,"Compare key $key");
   }
 
 }
@@ -204,16 +213,24 @@ print "# ====== Test Alasdair's Modifications ======\n";
 
 # static methods Astro::WaveBand
 
-ok( Astro::WaveBand::has_filter( UIST => 'J98') );
-ok( !Astro::WaveBand::has_filter( UIST => 'Kprime') );
-ok(Astro::WaveBand::has_filter( UIST => 'J98', IRCAM => 'K98'));
-ok(!Astro::WaveBand::has_filter( UIST => 'H98', IRCAM => 'K97'));
+ok( Astro::WaveBand::has_filter( UIST => 'J98') ,"UIST has J98");
+ok( !Astro::WaveBand::has_filter( UIST => 'Kprime'), 
+    "UIST does not have Kprime" );
+ok(Astro::WaveBand::has_filter( UIST => 'J98', IRCAM => 'K98'),
+  "UIST has J98 and IRCAM has K98");
+ok(!Astro::WaveBand::has_filter( UIST => 'H98', IRCAM => 'K97'),
+  "UIST = H98 and IRCAM=K97 fails");
 
-ok( Astro::WaveBand::has_instrument( UKIRT => 'UIST' ) );
-ok( !Astro::WaveBand::has_instrument( UKIRT => 'SCUBA' ) );
+ok( Astro::WaveBand::has_instrument( UKIRT => 'UIST' ),
+  "UKIRT has UIST");
+ok( !Astro::WaveBand::has_instrument( UKIRT => 'SCUBA' ),
+  "UKIRT does not have SCUBA");
 
-ok( Astro::WaveBand::is_observable( UKIRT => 'Kprime' ) );
-ok( !Astro::WaveBand::is_observable( UKIRT => '850N' ) );
-ok( Astro::WaveBand::is_observable( JCMT => '850N' ) );
+ok( Astro::WaveBand::is_observable( UKIRT => 'Kprime' ),
+  "UKIRT has Kprime");
+ok( !Astro::WaveBand::is_observable( UKIRT => '850N' ),
+  "UKIRT does not have 850N");
+ok( Astro::WaveBand::is_observable( JCMT => '850N' ),
+  "JCMT has 850N");
 
 exit;

@@ -1,3 +1,9 @@
+2004-09-13  Tim Jenness  <tjenness@cpan.org>
+
+	* t/waveband.t: Use Test::More
+
+	* WaveBand.pm: Add WFCAM
+
 2003-07-16  Alasdair Allan <aa@astro.ex.ac.uk>
 
         * WaveBand.pm: Added three static methods has_instrument(),

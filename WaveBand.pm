@@ -54,7 +54,7 @@ use Carp;
 use warnings::register;
 
 # CVS version: $Revision$
-our $VERSION = 0.06;
+our $VERSION = 0.07;
 
 # Overloading
 use overload '""' => "natural";
@@ -66,7 +66,7 @@ use constant CLIGHT => 299792458;
 
 # list of instruments specific to a telescope
 my %TELESCOPE = (
-               UKIRT => [ "IRCAM", "UFTI", "UIST", "MICHELLE" ],
+               UKIRT => [ "IRCAM", "UFTI", "UIST", "MICHELLE", "WFCAM" ],
                JCMT => [ "SCUBA", "RXA3", "RXB3", "RXW", "DAS" ] );
 
 # Continuum Filters are keyed by instrument
@@ -88,6 +88,14 @@ my %FILTERS = (
 			   N =>10.2,
 			   Q =>20.0,
 			  },
+	       WFCAM => {
+			 "blank" => 0,
+			 "Y" => "0.97",
+			 "J98" => "1.17",
+			 "H98" => "1.49",
+			 "K98" => "2.03",
+			 "H2_1-0_S1" => "2.11"
+			},
 	       IRCAM => {
 			 "J98" =>     "1.250" ,
 			 "H98" =>     "1.635" ,
@@ -197,6 +205,7 @@ my %FILTERS = (
 
 # Instruments that have natural units
 my %NATURAL = (
+	       WFCAM => 'filter',
  	       CGS4 => 'wavelength',
 	       SCUBA => 'filter',
 	       UFTI => 'filter',
@@ -920,7 +929,7 @@ sub has_instrument {
 =item B<is_observable>
 
 Returns true if the a particular telescope and filter combination is
-avaialble, otherwise returns C<undef>, e.g.
+avaialable, otherwise returns C<undef>, e.g.
 
   if( Astro::WaveBand::is_observable( UKIRT => 'Kprime' )  {
      ...
