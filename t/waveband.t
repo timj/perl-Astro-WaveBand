@@ -1,6 +1,6 @@
 
 use Test;
-BEGIN { plan tests => 80 }
+BEGIN { plan tests => 85 }
 
 use Astro::WaveBand;
 use warnings;
@@ -155,7 +155,15 @@ my @tests = (
 	      natural => "F79B10",
 	      waveband => 'infrared',
 	     },
-
+	     {
+	      _init => {Frequency => 345.0E9,
+			Instrument => 'RXA3',
+		       },
+	      filter => undef,
+	      wavelength => 868.9636,
+	      waveband => 'submm',
+	      natural => 345E9,
+	     }
 	    );
 
 print "# ====== Test behaviour ======\n";

@@ -54,7 +54,7 @@ use Carp;
 use warnings::register;
 
 # CVS version: $Revision$
-our $VERSION = 0.05;
+our $VERSION = 0.06;
 
 # Overloading
 use overload '""' => "natural";
@@ -182,6 +182,10 @@ my %NATURAL = (
 	       IRCAM => 'filter',
 	       MICHELLE => 'filter',
 	       ACSIS => 'frequency',
+	       DAS => 'frequency',
+	       RXA3 => 'frequency',
+	       RXB3 => 'frequency',
+	       RXW => 'frequency',
 	       UIST => 'filter',
 	      );
 
@@ -468,7 +472,7 @@ present wavelength in microns.
 Returns C<undef> if the value can not be determined.
 
 This method is called automatically when the object is stringified.
-Note that you will not know the unit that was chosen....
+Note that you will not know the unit that was chosen a priori.
 
 =cut
 
@@ -821,13 +825,18 @@ Currently SCUBA is the main issue. With a 450:850 filter this class
 always returns the shortest wavelength (since that is the wavelength
 that affects scheduling the most).
 
+Should handle velocities and redshifts in order to disambiguate rest
+frequencies and observed frequencies. Would also be nice if the class
+could accept a molecule and transition, allowing the natural unit
+to appear as something like: "CO 3-2 @ 30km/s LSR radio".
+
 =head1 AUTHORS
 
 Tim Jenness E<lt>t.jenness@jach.hawaii.eduE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2001 Particle Physics and Astronomy Research Council.
+Copyright (C) 2001-2003 Particle Physics and Astronomy Research Council.
 All Rights Reserved.
 
 This program is free software; you can redistribute it and/or modify

@@ -1,3 +1,7 @@
+2003-01-31  Tim Jenness  <tjenness@cpan.org>
+
+	* WaveBand.pm: Add support for JCMT heterodyne instruments
+
 2002-08-14  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* WaveBand.pm: Add UIST support
