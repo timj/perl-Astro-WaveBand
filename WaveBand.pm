@@ -119,6 +119,22 @@ my %FILTERS = (
 			"Blank" => "-2.222",# -ve version of OT wavelength
 			"Mask"  => "-2.32", # ditto
 		       },
+	       UIST => {
+			"K-target"  => 1.64,
+			"J98"       => 1.25,
+			"H98"       => 1.64,
+			"1.66"      => 1.664,
+			"1.644Fe"   => 1.644,
+			"K98"       => 2.20,
+			"2.122S(1)" => 2.122,
+			"BrG"       => 2.166,
+			"2.27"      => 2.270,
+			"2.32CO"    => 2.324,
+			"Dust"      => 3.295,
+			"Lp98"      => 3.77,
+			"M98"       => 4.70,
+
+		       },
 	       MICHELLE => {
 			    "F105B53" => 10.5,
 			    "F79B10" =>   7.9,
@@ -166,6 +182,7 @@ my %NATURAL = (
 	       IRCAM => 'filter',
 	       MICHELLE => 'filter',
 	       ACSIS => 'frequency',
+	       UIST => 'filter',
 	      );
 
 
