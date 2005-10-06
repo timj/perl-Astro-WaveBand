@@ -102,14 +102,14 @@ my %FILTERS = (
 			   Q =>20.0,
 			  },
 	       WFCAM => {
-			 "Z"     => "0.83",
-			 "Y"     => "0.97",
-			 "J"     => "1.17",
-			 "H"     => "1.49",
-			 "K"     => "2.03",
-			 "1-0S1" => "2.111",
-			 "BGamma"=> "2.155",
-			 "Blank" => "0",
+			 "Z"     => 0.83,
+			 "Y"     => 0.97,
+			 "J"     => 1.17,
+			 "H"     => 1.49,
+			 "K"     => 2.03,
+			 "1-0S1" => 2.111,
+			 "BGamma"=> 2.155,
+			 "Blank" => 0,
 			 },
 	       IRCAM => {
 			 "J98" =>     "1.250" ,
@@ -866,6 +866,7 @@ sub _convert_to {
     # Inverse cm
     $output = 1.0 / ( $lambda / 10_000);
   } elsif ($category eq 'filter') {
+
     # This is slightly harder since we know the value but
     # not the key. Go through each hash looking for a matching
     # key. If we know the instrument we start looking there
@@ -880,16 +881,20 @@ sub _convert_to {
     # the base wavelegnth to use 8 significant figures
     $lambda = sprintf("%8e", $lambda);
 
-    OUTER: foreach my $inst (@search) {
-	next unless exists $FILTERS{$inst};
-	my $hash = $FILTERS{$inst};
-	for my $key (keys %{ $hash }) {
-	  if ($hash->{$key} == $lambda) {
-	    $output = $key;
-	    last OUTER;
-	  }
-	}
+  OUTER: foreach my $inst (@search) {
+      next unless exists $FILTERS{$inst};
+      my $hash = $FILTERS{$inst};
+      for my $key (keys %{ $hash }) {
+        # Make sure we use the same rounding scheme on the values
+        # returned from the hash, so we don't have to worry about
+        # rounding issues fouling things up (like saying 8.3e-1 !=
+        # 0.83).
+        if (sprintf("%8e", $hash->{$key} ) eq $lambda) {
+          $output = $key;
+          last OUTER;
+        }
       }
+    }
   }
 
   return $output;
