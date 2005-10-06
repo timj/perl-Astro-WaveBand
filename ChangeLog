@@ -1,3 +1,13 @@
+2005-10-06  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
+
+	* WaveBand.pm: When converting from wavelength to filter in the
+	_convert_to() function and using lookup table to do so, round the
+	value obtained from the lookup table in the same fashion as the
+	rounding of the given wavelength in order to avoid rounding issues
+	when trying to compare floating-point numbers.
+
+	* t/waveband.t: Test fix of above bug.
+	
 2004-12-08  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
 
 	* WaveBand.pm: Add comparison operators and overloaded comparison
