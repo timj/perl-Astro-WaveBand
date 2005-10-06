@@ -1,5 +1,5 @@
 #!perl
-use Test::More tests => 105;
+use Test::More tests => 111;
 
 use Astro::WaveBand;
 use warnings;
@@ -171,7 +171,17 @@ my @tests = (
               wavelength => 868.9636,
               waveband => 'submm',
               natural => 345E9,
-             }
+             },
+             {
+              _init => { Filter => "Z",
+                         Instrument => 'WFCAM',
+                       },
+              filter => "Z",
+              wavelength => 0.83,
+              wavenumber => 12048.1927711,
+              natural => "Z",
+              waveband => 'optical',
+             },
             );
 
 print "# ====== Test behaviour ======\n";
