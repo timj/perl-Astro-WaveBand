@@ -149,6 +149,7 @@ my %FILTERS = (
 		       },
 	       UIST => {
 #			"K-target"  => 1.64, # old
+                  "ZMK" => 1.033,
 			"Hartmann"  => 1.64,
 			"J98"       => 1.25,
 			"H98"       => 1.64,
