@@ -233,6 +233,7 @@ my %NATURAL = (
 	       RXA3 => 'frequency',
 	       RXB3 => 'frequency',
 	       RXW => 'frequency',
+               HARP => 'frequency',
 	       UIST => 'filter',
 	      );
 
