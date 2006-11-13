@@ -1,3 +1,7 @@
+2006-11-13  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* WaveBand.pm: Add HARP support.
+
 2005-10-06  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
 
 	* WaveBand.pm: When converting from wavelength to filter in the
