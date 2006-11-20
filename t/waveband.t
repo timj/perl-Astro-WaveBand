@@ -1,5 +1,5 @@
 #!perl
-use Test::More tests => 117;
+use Test::More tests => 122;
 
 use Astro::WaveBand;
 use warnings;
@@ -166,6 +166,15 @@ my @tests = (
              {
               _init => {Frequency => 345.0E9,
                         Instrument => 'RXA3',
+                       },
+              filter => undef,
+              wavelength => 868.9636,
+              waveband => 'submm',
+              natural => 345E9,
+             },
+             {
+              _init => {Frequency => 345.0E9,
+                        Instrument => 'HARP',
                        },
               filter => undef,
               wavelength => 868.9636,
