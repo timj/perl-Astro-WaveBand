@@ -218,6 +218,10 @@ my %FILTERS = (
 			 "450N:850N" => 442,
 			 "350N:750N" => 344,
 			},
+	       'SCUBA-2' => {
+			     850 => 863, # guesses
+			     450 => 445,
+			    },
 	      );
 
 # Instruments that have natural units
@@ -225,6 +229,7 @@ my %NATURAL = (
 	       WFCAM => 'filter',
  	       CGS4 => 'wavelength',
 	       SCUBA => 'filter',
+	       'SCUBA-2' => 'filter',
 	       UFTI => 'filter',
 	       IRCAM => 'filter',
 	       MICHELLE => 'filter',
@@ -233,6 +238,10 @@ my %NATURAL = (
 	       RXA3 => 'frequency',
 	       RXB3 => 'frequency',
 	       RXW => 'frequency',
+	       RXWB => 'frequency',
+	       RXWC => 'frequency'
+	       RXWD => 'frequency',
+	       RXWD2 => 'frequency',
                HARP => 'frequency',
 	       UIST => 'filter',
 	      );

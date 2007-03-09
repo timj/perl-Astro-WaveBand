@@ -1,3 +1,7 @@
+2007-03-09  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* WaveBand.pm: Add WB, WD
+
 2006-11-13  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* WaveBand.pm: Add HARP support.
