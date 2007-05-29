@@ -1,5 +1,5 @@
 #!perl
-use Test::More tests => 122;
+use Test::More tests => 127;
 
 use Astro::WaveBand;
 use warnings;
@@ -200,6 +200,15 @@ my @tests = (
               wavenumber => 12048.1927711,
               natural => "Z",
               waveband => 'optical',
+             },
+             {
+              _init => { Filter => "Y_MK",
+                         Instrument => 'UFTI',
+                       },
+              filter => "Y_MK",
+              wavelength => 1.022,
+              wavenumber => 9784.73581213,
+              waveband => 'infrared',
              },
             );
 
