@@ -1,8 +1,28 @@
-2007-03-09  Tim Jenness  <timj@jach.hawaii.edu>
+2010-12-30  Tim Jenness  <tjenness@cpan.org>
+
+	* Use Module::Build
+
+2007-05-29  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
+
+	* WaveBand.pm: Add 2.122MK filter for UFTI
+
+2008-12-09  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
+
+	* WaveBand.pm: Add UIST Y_MK filter
+
+2008-09-11  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
+
+	* WaveBand.pm: Add 1.619nBH filter for WFCAM
+
+2007-05-29  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
+
+	* WaveBand.pm: Add Y+MK filter for UFTI
+
+2007-03-09  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: Add WB, WD
 
-2006-11-13  Tim Jenness  <timj@jach.hawaii.edu>
+2006-11-13  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: Add HARP support.
 
@@ -15,7 +35,7 @@
 	when trying to compare floating-point numbers.
 
 	* t/waveband.t: Test fix of above bug.
-	
+
 2004-12-08  Brad Cavanagh <b.cavanagh@jach.hawaii.edu>
 
 	* WaveBand.pm: Add comparison operators and overloaded comparison
@@ -36,8 +56,8 @@
           what it says on the box. Check the inline POD for details.
           Added a %TELESCOPE lookup hash to go along with the existing
           %FILTERS lookup hash.
-          
-2003-05-30  Tim Jenness  <timj@jach.hawaii.edu>
+
+2003-05-30  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: Update UIST filters.
 
@@ -45,24 +65,24 @@
 
 	* WaveBand.pm: Add support for JCMT heterodyne instruments
 
-2002-08-14  Tim Jenness  <timj@jach.hawaii.edu>
+2002-08-14  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: Add UIST support
 
-2002-06-04  Tim Jenness  <timj@jach.hawaii.edu>
+2002-06-04  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: Add Blank for UFTI and add SCUBA filters. Still a
 	problem with multiple wavelengths associated with a single filter.
 
-2002-05-28  Tim Jenness  <timj@jach.hawaii.edu>
+2002-05-28  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: New CPAN release 0.04 (with README!)
 
-2002-05-27  Tim Jenness  <timj@jach.hawaii.edu>
+2002-05-27  Tim Jenness  <tjenness@cpan.org>
 
 	* WaveBand.pm: Add licence statement 
 
-2002-05-16  Tim Jenness  <timj@jach.hawaii.edu>
+2002-05-16  Tim Jenness  <tjenness@cpan.org>
 
 	* CPAN release 0.03
 
