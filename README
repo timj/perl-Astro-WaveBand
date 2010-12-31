@@ -25,19 +25,21 @@ at the UKIRT and JCMT telescopes. Please send more instrument details.
 Building
 --------
 
-  perl Makefile.PL
-  make
-  make test
-  make install
+  perl Build.PL
+  ./Build
+  ./Build test
+  ./Build install
 
 Author
 ------
 
-This module was written by Tim Jenness  <t.jenness@jach.hawaii.edu>
-of the Joint Astronomy Centre. Some static functions added by Alasdair
-Allan <aa@astro.ex.ac.uk> to support his work on the eSTAR Project.
+This module was written by Tim Jenness <t.jenness@jach.hawaii.edu> and 
+Brad Cavanagh of the Joint Astronomy Centre. Some static functions added 
+by Alasdair Allan <aa@astro.ex.ac.uk> to support his work on the eSTAR 
+Project.
 
-Copyright (C) 2001-2002 Particle Physics and Astronomy Research Council.
+Copyright 2007,2008,2010 Science and Technology Facilties Council.
+Copyright (C) 2001-2007 Particle Physics and Astronomy Research Council.
 All Rights Reserved. This program is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 

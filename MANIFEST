@@ -1,6 +1,7 @@
 ChangeLog
 MANIFEST
-Makefile.PL
-WaveBand.pm
+Build.PL
+lib/Astro/WaveBand.pm
 t/waveband.t
 README
+META.yml
