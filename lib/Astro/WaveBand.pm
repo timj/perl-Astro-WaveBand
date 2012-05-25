@@ -63,7 +63,7 @@ use Carp;
 use warnings::register;
 
 # CVS version: $Revision$
-our $VERSION = 0.07;
+our $VERSION = 0.08;
 
 # Overloading
 use overload '""' => "natural",
@@ -100,6 +100,19 @@ my %FILTERS = (
 			   M => 4.7,
 			   N =>10.2,
 			   Q =>20.0,
+			   up => 0.355,
+			   gp => 0.470,
+			   rp => 0.620,
+			   ip => 0.750,
+			   zp => 0.880,
+			   Pu => 0.355,
+			   Pg => 0.470,
+			   Pr => 0.620,
+			   Pi => 0.750,
+			   Pz => 0.880,
+			   Y  => 1.020,   # this will get incorrectly classed as infrared
+			   w  => 0.608,
+			   SO => 0.600,
 			  },
 	       WFCAM => {
 			 "Z"     => 0.83,
@@ -1121,6 +1134,7 @@ to appear as something like: "CO 3-2 @ 30km/s LSR radio".
 
 Tim Jenness E<lt>t.jenness@jach.hawaii.eduE<gt>
 Alasdair Allan E<lt>aa@astro.ex.ac.ukE<gt>
+Tim Lister E<lt>tlister@lcogt.netE<gt>
 
 =head1 COPYRIGHT
 
