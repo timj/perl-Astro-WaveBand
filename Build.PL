@@ -19,6 +19,7 @@ my $build = Module::Build->new
                    'Tim Jenness <tjenness@cpan.org>',
                    'Brad Cavanagh <b.cavanagh@jach.hawaii.edu>',
                    'Alasdair Allan <aa@astro.ex.ac.uk>',
+                   'Tim Lister <tlister@lcogt.net>',
                   ],
    meta_merge => {
                resources =>  {
@@ -29,6 +30,9 @@ my $build = Module::Build->new
    build_requires => {
                       'Test::More' => 0,
                      },
+   configure_requires => {
+                          "Module::Build" => 0.30,
+                         },
   );
 
 $build->create_build_script;

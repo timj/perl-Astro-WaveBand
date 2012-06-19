@@ -33,12 +33,12 @@ Building
 Author
 ------
 
-This module was written by Tim Jenness <t.jenness@jach.hawaii.edu> and 
-Brad Cavanagh of the Joint Astronomy Centre. Some static functions added 
-by Alasdair Allan <aa@astro.ex.ac.uk> to support his work on the eSTAR 
-Project.
+This module was written by Tim Jenness <t.jenness@jach.hawaii.edu> and
+Brad Cavanagh of the Joint Astronomy Centre. Some static functions added
+by Alasdair Allan <aa@astro.ex.ac.uk> to support his work on the eSTAR
+Project. Tim Lister added support for Las Cumbres telescopes.
 
-Copyright 2007,2008,2010 Science and Technology Facilties Council.
+Copyright 2007,2008,2010,2012 Science and Technology Facilties Council.
 Copyright (C) 2001-2007 Particle Physics and Astronomy Research Council.
 All Rights Reserved. This program is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
