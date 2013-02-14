@@ -80,7 +80,7 @@ use constant CLIGHT => 299792458;
 # list of instruments specific to a telescope
 my %TELESCOPE = (
                UKIRT => [ "IRCAM", "UFTI", "UIST", "MICHELLE", "WFCAM" ],
-               JCMT => [ "SCUBA", "RXA3", "RXB3", "RXW", "DAS" ] );
+               JCMT => [ "SCUBA", "RXA3", "RXA3M", "RXB3", "RXW", "DAS" ] );
 
 # Continuum Filters are keyed by instrument
 # although if an instrument is not specified the filters
@@ -254,6 +254,7 @@ my %NATURAL = (
 	       ACSIS => 'frequency',
 	       DAS => 'frequency',
 	       RXA3 => 'frequency',
+	       RXA3M => 'frequency',
 	       RXB3 => 'frequency',
 	       RXW => 'frequency',
 	       RXWB => 'frequency',
