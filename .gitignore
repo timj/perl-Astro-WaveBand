@@ -1,7 +1,9 @@
-_build
-Build
-blib
-pm_to_blib
-*.tar.gz
-MYMETA.yml
-MYMETA.json
+/_build
+/Build
+/blib
+/pm_to_blib
+/*.tar.gz
+/META.*
+/MYMETA.*
+.*.swp
+*~
