@@ -500,6 +500,30 @@ sub natural_unit {
     return $self->{NaturalUnit};
 }
 
+=item B<species>
+
+Name of species involved in an emission line.
+
+=cut
+
+sub species {
+    my $self = shift;
+    if (@_) {$self->{'Species'} = shift;}
+    return $self->{'Species'};
+}
+
+=item B<transition>
+
+Transition giving rise to line emission.
+
+=cut
+
+sub transition {
+    my $self = shift;
+    if (@_) {$self->{'Transition'} = shift;}
+    return $self->{'Transition'};
+}
+
 =back
 
 =head2 General Methods
@@ -1148,7 +1172,7 @@ that affects scheduling the most).
 
 Should handle velocities and redshifts in order to disambiguate rest
 frequencies and observed frequencies. Would also be nice if the class
-could accept a molecule and transition, allowing the natural unit
+used the species and transition to allow the natural unit
 to appear as something like: "CO 3-2 @ 30km/s LSR radio".
 
 =head1 AUTHORS

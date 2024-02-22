@@ -1,5 +1,5 @@
 #!perl
-use Test::More tests => 127;
+use Test::More tests => 132;
 
 use Astro::WaveBand;
 use warnings;
@@ -311,5 +311,20 @@ my $wb_wfcam = Astro::WaveBand->new(
     Instrument => 'WFCAM');
 ok($wb_ufti != $wb_wfcam, "UFTI Z is not equal to WFCAM Z");
 ok(!($wb_ufti == $wb_wfcam), "UFTI Z is not equal to WFCAM Z");
+
+my $wb4 = Astro::WaveBand->new(
+    Instrument => 'HARP',
+    Frequency => 345.7959899e9,
+    Species => 'CO',
+    Transition => '3 - 2');
+
+isa_ok($wb4, 'Astro::WaveBand');
+is($wb4->species, 'CO', 'Read species accessor');
+is($wb4->transition, '3 - 2', 'Read transition accessor');
+$wb4->frequency(354.5054759e9);
+$wb4->species('HCN');
+$wb4->transition('4 - 3');
+is($wb4->species, 'HCN', 'Read update species accessor');
+is($wb4->transition, '4 - 3', 'Read updated transition accessor');
 
 exit;
