@@ -1,5 +1,5 @@
 #!perl
-use Test::More tests => 132;
+use Test::More tests => 137;
 
 use Astro::WaveBand;
 use warnings;
@@ -326,5 +326,11 @@ $wb4->species('HCN');
 $wb4->transition('4 - 3');
 is($wb4->species, 'HCN', 'Read update species accessor');
 is($wb4->transition, '4 - 3', 'Read updated transition accessor');
+
+is($wb4->frequency({format => 1}), '354.505 GHz', 'Format frequency');
+is($wb4->frequency({format => 1, ndp => 1}), '354.5 GHz', 'Format frequency, 1 dp');
+is($wb4->natural({format => 1, ndp => 2}), '354.51 GHz', 'Natural format, 2 dp');
+is($wb4->wavelength({format => 1}), '845.664 mu', 'Format wavelength');
+is($wb4->wavenumber({format => 1}), '11.825/cm', 'Format wavenumber');
 
 exit;

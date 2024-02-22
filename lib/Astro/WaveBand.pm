@@ -278,6 +278,30 @@ my %NATURAL = (
     UIST => 'filter',
 );
 
+# Unit prefixes, in descending size order.
+my @PREFIXES = (
+    [Q => 30],
+    [R => 27],
+    [Y => 24],
+    [Z => 21],
+    [E => 18],
+    [P => 15],
+    [T => 12],
+    [G => 9],
+    [M => 6],
+    [k => 3],
+    ['' => 0],
+    [m => -3],
+    [mu => -6],
+    [n => -9],
+    [p => -12],
+    [f => -15],
+    [a => -18],
+    [z => -21],
+    [y => -24],
+    [r => -27],
+    [q => -30],
+);
 
 =head1 METHODS
 
@@ -368,6 +392,30 @@ it for later. If a new value is provided all caches will be cleared.
 All input values are converted to microns internally (since a
 single base unit should be chosen to simplify internal conversions).
 
+If a numeric accessor (wavelength, frequency, wavenumber) is called
+with a hash reference as the first argument then it is interpreted
+as a set of options.  (The filter accessor also accepts an initial
+hash reference for consistency.)  Options can include:
+
+=over 4
+
+=item format
+
+If returning a value, construct a formatted string including the units.
+
+=item ndp
+
+When returning a string (C<format> is true), round the value to this number
+of decimal places.  If not specified, 3 is used.
+
+=back
+
+For example:
+
+    $w->frequency({format => 1})
+
+Could return a string such as "345.796 GHz".
+
 =over 4
 
 =item B<wavelength>
@@ -381,12 +429,16 @@ Wavelength in microns.
 
 sub wavelength {
     my $self = shift;
+    my %opt = %{@_ && 'HASH' eq ref $_[0] ? shift : {}};
+
     if (@_) {
         my $value = shift;
         $self->_store_in_cache('wavelength' => $value);
     }
     else {
-        return $self->_fetch_from_cache('wavelength');
+        my $value = $self->_fetch_from_cache('wavelength');
+        return $self->_format_with_unit($value * 1e-6, 'm', $opt{'ndp'} // 3) if $opt{'format'};
+        return $value;
     }
     return;
 }
@@ -402,6 +454,8 @@ Frequency in Hertz.
 
 sub frequency {
     my $self = shift;
+    my %opt = %{@_ && 'HASH' eq ref $_[0] ? shift : {}};
+
     if (@_) {
         my $value = shift;
 
@@ -410,7 +464,9 @@ sub frequency {
     }
     else {
         # Read value from the cache
-        return $self->_read_value_with_convert("frequency");
+        my $value = $self->_read_value_with_convert("frequency");
+        return $self->_format_with_unit($value, 'Hz', $opt{'ndp'} // 3) if $opt{'format'};
+        return $value;
     }
 
     return;
@@ -427,6 +483,8 @@ Wavenumber (reciprocal of wavelength) in inverse centimetres.
 
 sub wavenumber {
     my $self = shift;
+    my %opt = %{@_ && 'HASH' eq ref $_[0] ? shift : {}};
+
     if (@_) {
         my $value = shift;
 
@@ -435,7 +493,9 @@ sub wavenumber {
     }
     else {
         # Read value from the cache
-        return $self->_read_value_with_convert("wavenumber");
+        my $value = $self->_read_value_with_convert("wavenumber");
+        return $self->_format_fixed_unit($value, '/cm', $opt{'ndp'} // 3) if $opt{'format'};
+        return $value;
     }
 
     return;
@@ -453,6 +513,8 @@ to do any conversions to other forms.
 
 sub filter {
     my $self = shift;
+    my %opt = %{@_ && 'HASH' eq ref $_[0] ? shift : {}};
+
     if (@_) {
         my $value = shift;
 
@@ -591,10 +653,14 @@ Returns C<undef> if the value can not be determined.
 This method is called automatically when the object is stringified.
 Note that you will not know the unit that was chosen a priori.
 
+If a hash reference (containing formatting options) is given
+then it is passed to the relevant accessor method.
+
 =cut
 
 sub natural {
     my $self = shift;
+    my %opt = %{@_ && 'HASH' eq ref $_[0] ? shift : {}};
 
     # First see if the default unit is set
     my $unit = $self->natural_unit;
@@ -613,11 +679,11 @@ sub natural {
     # retrieve the value
     my $value;
     if ($self->can($unit)) {
-        $value = $self->$unit();
+        $value = $self->$unit(\%opt);
     }
 
     # All else fails... try wavelength
-    $value = $self->wavelength() unless defined $value;
+    $value = $self->wavelength(\%opt) unless defined $value;
 
     return $value;
 }
@@ -1029,6 +1095,59 @@ sub _convert_from {
     }
 
     return $output;
+}
+
+=item B<_format_with_unit>
+
+Format a numeric value by selecting an appropriate unit
+prefix.  The number is then returned formatted to the given
+number of decimal places followed by a space and then
+the combined unit string.
+
+=cut
+
+sub _format_with_unit {
+    my $self = shift;
+    my $value = shift;
+    my $baseunit = shift;
+    my $ndp = shift;
+
+    return '' unless defined $value;
+
+    my $range = log($value) / log(10);
+    my ($unit, $prefrange);
+    foreach my $pr (@PREFIXES) {
+        ($unit, $prefrange) = @$pr;
+        if ($range >= $prefrange) {
+            last;
+        }
+    }
+
+    # Special case: show microns as just "mu"?
+    $unit .= $baseunit unless $unit eq 'mu' and $baseunit eq 'm';
+
+    return sprintf '%.*f %s', $ndp, ($value / 10 ** $prefrange), $unit;
+}
+
+=item B<_format_fixed_unit>
+
+Method to format a value in the same way as C<_format_with_unit>
+but applying a fixed unit string.  (I.e. no automatic prefix.)
+
+Note: since this is currently only used with '/cm' for wavenumber,
+no space is included between the value and unit string.
+
+=cut
+
+sub _format_fixed_unit {
+    my $self = shift;
+    my $value = shift;
+    my $unit = shift;
+    my $ndp = shift;
+
+    return '' unless defined $value;
+
+    return sprintf '%.*f%s', $ndp, $value, $unit;
 }
 
 =back
