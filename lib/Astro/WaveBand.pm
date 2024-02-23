@@ -612,25 +612,25 @@ sub waveband {
     if ($lambda >= 10000) {    # > 1cm
         $band = 'radio';
     }
-    elsif ($lambda < 10000 and $lambda >= 1000) {
+    elsif ($lambda >= 1000) {
         $band = 'mm';
     }
-    elsif ($lambda < 1000 and $lambda >= 100) {
+    elsif ($lambda >= 100) {
         $band = 'submm';
     }
-    elsif ($lambda < 100 and $lambda >= 1) {
+    elsif ($lambda >= 1) {
         $band = 'infrared';
     }
-    elsif ($lambda < 1 and $lambda >= 0.3) {
+    elsif ($lambda >= 0.3) {
         $band = 'optical';
     }
-    elsif ($lambda < 0.3 and $lambda >= 0.01) {
+    elsif ($lambda >= 0.01) {
         $band = 'ultraviolet';
     }
-    elsif ($lambda < 0.01 and $lambda >= 0.00001) {
+    elsif ($lambda >= 0.00001) {
         $band = 'x-ray';
     }
-    elsif ($lambda < 0.00001) {
+    else {
         $band = 'gamma-ray';
     }
 
