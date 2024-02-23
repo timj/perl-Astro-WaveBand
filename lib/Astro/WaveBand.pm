@@ -708,7 +708,7 @@ you would do
     if ($wb1 < $wb2) {...}
 
 and it will work as you expect. This method does not overload
-the == operator; see the C<compare> method for that.
+the == operator; see the C<equals> method for that.
 
 =cut
 
