@@ -84,7 +84,7 @@ my %TELESCOPE = (
     UKIRT => [
         qw/CGS4 IRCAM UFTI UIST MICHELLE WFCAM/],
     JCMT => [
-        qw/SCUBA SCUBA-2 RXA3 RXA3M RXB3 RXW
+        qw/SCUBA SCUBA-2 RXA3 RXA3M RXB3 RXW RXH3
             ACSIS DAS HARP ALAIHI UU AWEOWEO
             KUNTUR/
     ],
@@ -270,6 +270,7 @@ my %NATURAL = (
     RXWC => 'frequency',
     RXWD => 'frequency',
     RXWD2 => 'frequency',
+    RXH3 => 'frequency',
     HARP => 'frequency',
     ALAIHI => 'frequency',
     UU => 'frequency',
