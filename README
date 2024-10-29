@@ -14,7 +14,7 @@ Requirements
 ------------
 
 No other modules are required.
-Requires Perl 5.6.0 or newer.
+Requires Perl 5.10.0 or newer.
 
 Limitations
 -----------

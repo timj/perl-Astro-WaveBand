@@ -64,7 +64,7 @@ use Carp;
 use warnings::register;
 
 # CVS version: $Revision$
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 # Overloading
 use overload
